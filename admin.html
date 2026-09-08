@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Vasudev Verma Website</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>" />
+  <style>
+    .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media(max-width:768px){ .admin-grid { grid-template-columns: 1fr; } }
+    .admin-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .admin-tab-btn {
+      padding: 0.5rem 1.25rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600;
+      background: var(--off-white); color: var(--text-mid); transition: var(--transition);
+      border: 2px solid var(--border);
+    }
+    .admin-tab-btn.active { background: var(--saffron); color: white; border-color: var(--saffron); }
+    .admin-tab-content { display: none; }
+    .admin-tab-content.active { display: block; }
+    .export-modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      z-index: 3000; display: none; align-items: center; justify-content: center; padding: 1rem;
+    }
+    .export-modal-box {
+      background: white; border-radius: var(--radius-lg); padding: 2rem; max-width: 600px; width: 100%;
+      max-height: 80vh; overflow-y: auto;
+    }
+    .export-modal-box h3 { color: var(--navy); margin-bottom:1rem; }
+    .export-modal-box textarea {
+      width: 100%; height: 300px; font-family: monospace; font-size: 0.78rem;
+      border: 2px solid var(--border); border-radius: 6px; padding: 1rem; resize: vertical;
+    }
+    .admin-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: white; border-radius: var(--radius-md); padding: 1.25rem; text-align: center;
+      box-shadow: var(--shadow-sm); border-top: 3px solid var(--saffron);
+    }
+    .stat-card:nth-child(2) { border-top-color: var(--green); }
+    .stat-card:nth-child(3) { border-top-color: var(--navy); }
+    .stat-num { font-size: 2rem; font-weight: 900; color: var(--saffron); font-family: 'Poppins',sans-serif; }
+    .stat-card:nth-child(2) .stat-num { color: var(--green); }
+    .stat-card:nth-child(3) .stat-num { color: var(--navy); }
+    .stat-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em; }
+  </style>
+</head>
+<body style="background:#f0f2f5;">
+
+<!-- LOGIN SCREEN -->
+<div id="admin-login" style="min-height:100vh;background:linear-gradient(135deg,var(--navy),#1a1a5e);display:flex;align-items:center;justify-content:center;padding:1rem;">
+  <div class="admin-login-box">
+    <div style="font-size:3rem;margin-bottom:0.75rem;">🔐</div>
+    <h2>Admin Panel</h2>
+    <p>Vasudev Verma Official Website<br>Authorized staff only</p>
+    <div class="admin-error" id="admin-error"></div>
+    <form id="admin-login-form">
+      <div class="form-group" style="text-align:left;">
+        <label for="admin-password" style="font-size:0.85rem;font-weight:600;color:var(--navy);">Password</label>
+        <input type="password" id="admin-password" placeholder="Enter admin password" style="width:100%;margin-top:0.4rem;" required />
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:0.5rem;">
+        🔓 Login करें
+      </button>
+    </form>
+    <div style="margin-top:1.5rem;padding:0.75rem;background:#f8f8f5;border-radius:6px;font-size:0.75rem;color:#888;text-align:left;">
+      <strong>Default password:</strong> <code>vasudev2026</code><br>
+      <em>js/main.js में ADMIN_PASSWORD बदलें।</em>
+    </div>
+    <a href="index.html" style="display:block;margin-top:1rem;font-size:0.82rem;color:#888;">← Website पर वापस जाएं</a>
+  </div>
+</div>
+
+<!-- ADMIN PANEL CONTENT -->
+<div id="admin-panel-content" style="display:none;">
+
+  <!-- Admin Header -->
+  <div class="admin-header">
+    <div style="display:flex;align-items:center;gap:0.75rem;">
+      <div style="width:36px;height:36px;border-radius:50%;background:var(--saffron);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;">VV</div>
+      <div>
+        <h1>Vasudev Verma — Admin Panel</h1>
+        <div style="font-size:0.7rem;color:rgba(255,255,255,0.5);">Daily Schedule Manager</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <span class="admin-badge">Staff Only</span>
+      <a href="index.html" style="color:rgba(255,255,255,0.6);font-size:0.82rem;">🌐 Website</a>
+      <button onclick="adminLogout()" style="color:rgba(255,255,255,0.6);font-size:0.82rem;background:none;border:1px solid rgba(255,255,255,0.2);padding:0.35rem 0.75rem;border-radius:4px;cursor:pointer;">🚪 Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-container">
+
+    <!-- Stats -->
+    <div class="admin-stats" id="admin-stats">
+      <div class="stat-card"><div class="stat-num" id="stat-total">-</div><div class="stat-label">Total Entries</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-today">-</div><div class="stat-label">Today's Events</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-upcoming">-</div><div class="stat-label">Upcoming (7 days)</div></div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="admin-saved-msg" style="display:none;background:var(--green-light);border:1px solid var(--green);color:var(--green-dark);padding:1rem 1.25rem;border-radius:var(--radius-sm);margin-bottom:1.5rem;font-weight:600;">
+      ✅ Entry सफलतापूर्वक save की गई! नीचे JSON copy करके <code>data/schedule.json</code> में paste करें।
+    </div>
+
+    <!-- Tabs -->
+    <div class="admin-tabs">
+      <button class="admin-tab-btn active" onclick="switchAdminTab('add')">➕ नई Entry Add करें</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('list')">📋 सभी Entries देखें</button>
+      <button class="admin-tab-btn" onclick="switchAdminTab('help')">❓ Help</button>
+    </div>
+
+    <!-- TAB: Add Entry -->
+    <div class="admin-tab-content active" id="tab-add">
+      <div class="admin-card">
+        <h2>➕ नई Schedule Entry Add करें</h2>
+        <form id="add-entry-form" onsubmit="handleAddEntry(event)">
+          <div class="admin-grid">
+            <div>
+              <div class="form-group">
+                <label>📅 तारीख *</label>
+                <input type="date" id="entry-date" name="date" required />
+              </div>
+              <div class="form-group">
+                <label>⏰ समय *</label>
+                <input type="time" id="entry-time" name="time" required />
+              </div>
+              <div class="form-group">
+                <label>📌 Event Type *</label>
+                <select name="eventType" required>
+                  <option value="">-- चुनें --</option>
+                  <option value="Party Meeting">Party Meeting</option>
+                  <option value="Public Meeting">Public Meeting</option>
+                  <option value="Inauguration">Inauguration</option>
+                  <option value="Press Conference">Press Conference</option>
+                  <option value="Social Initiative">Social Initiative</option>
+                  <option value="Constituency Work">Constituency Work</option>
+                  <option value="Public Event">Public Event</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <div class="form-group">
+                <label>📝 Event का नाम / Title *</label>
+                <input type="text" id="entry-title" name="title" placeholder="जैसे: Jan Samvad — Rohini" required />
+              </div>
+              <div class="form-group">
+                <label>📍 स्थान (Venue + Area) *</label>
+                <input type="text" id="entry-location" name="location" placeholder="जैसे: Rohini Sector 1, North Delhi" required />
+              </div>
+              <div class="form-group">
+                <label>🗺️ Google Maps Link</label>
+                <input type="url" id="entry-mapurl" name="mapUrl" placeholder="https://maps.google.com/?q=…" />
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>📋 विवरण (Description)</label>
+            <textarea name="description" placeholder="Event की संक्षिप्त जानकारी…" style="min-height:80px;"></textarea>
+          </div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+            <button type="submit" class="btn btn-primary">💾 Entry Save करें</button>
+            <button type="reset" class="btn btn-outline" style="color:var(--text-mid);border-color:var(--border);">🔄 Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB: List Entries -->
+    <div class="admin-tab-content" id="tab-list">
+      <div class="admin-card">
+        <h2>📋 सभी Schedule Entries</h2>
+        <div id="admin-schedule-list">
+          <p style="color:var(--text-light);text-align:center;padding:1rem;">Loading…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB: Help -->
+    <div class="admin-tab-content" id="tab-help">
+      <div class="admin-card">
+        <h2>❓ Admin Panel — How to Use</h2>
+        <div style="display:flex;flex-direction:column;gap:1.5rem;color:var(--text-mid);font-size:0.875rem;line-height:1.7;">
+          <div>
+            <h4 style="color:var(--navy);margin-bottom:0.5rem;">📅 रोज़ का काम (Daily Routine)</h4>
+            <ol style="padding-left:1.5rem;">
+              <li>सुबह admin panel खोलें → "नई Entry Add करें" tab पर जाएं</li>
+              <li>आज की तारीख, समय, event name, और location fill करें</li>
+              <li>"Entry Save करें" बटन दबाएं</li>
+              <li>JSON popup आएगा — उसे copy करें</li>
+              <li><code>data/schedule.json</code> file खोलें (Notepad से) और पूरा content replace करें</li>
+              <li>Save करें — website पर automatically update हो जाएगा!</li>
+            </ol>
+          </div>
+          <div>
+            <h4 style="color:var(--navy);margin-bottom:0.5rem;">🔐 Password बदलना</h4>
+            <p><code>js/main.js</code> file खोलें और line पर <code>const ADMIN_PASSWORD = 'vasudev2026';</code> में password बदलें।</p>
+          </div>
+          <div>
+            <h4 style="color:var(--navy);margin-bottom:0.5rem;">📰 News Add करना</h4>
+            <p><code>data/news.json</code> file में नई entry add करें। Format:</p>
+            <code style="display:block;background:#f5f5f5;padding:0.75rem;border-radius:4px;font-size:0.78rem;">{"id":"6","date":"2026-09-09","source":"Newspaper","headline":"खबर का शीर्षक","summary":"विवरण…","url":"https://link-to-article.com"}</code>
+          </div>
+          <div>
+            <h4 style="color:var(--navy);margin-bottom:0.5rem;">📸 Photos Add करना</h4>
+            <p><code>images/gallery/</code> folder में photo डालें और <code>gallery.html</code> में उस photo का src update करें।</p>
+          </div>
+          <div style="background:var(--saffron-light);padding:1rem;border-radius:6px;border-left:3px solid var(--saffron);">
+            <strong style="color:var(--navy);">💡 Production में Deploy करने के बाद:</strong><br>
+            एक PHP/Node.js backend बनाएं जो directly schedule.json file write कर सके — इससे Copy-Paste step की ज़रूरत नहीं रहेगी। Developer से संपर्क करें।
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EXPORT JSON MODAL -->
+<div class="export-modal" id="export-modal">
+  <div class="export-modal-box">
+    <h3>📋 Updated schedule.json</h3>
+    <p style="font-size:0.82rem;color:var(--text-mid);margin-bottom:1rem;">
+      नीचे JSON copy करें और <code>data/schedule.json</code> file में paste करके save करें।
+    </p>
+    <textarea id="export-json" readonly></textarea>
+    <div style="display:flex;gap:0.75rem;margin-top:1rem;flex-wrap:wrap;">
+      <button id="copy-json-btn" onclick="copyExportJson()" class="btn btn-primary">📋 Copy JSON</button>
+      <button onclick="closeExportModal()" class="btn btn-outline">✕ Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="main.js"></script>
+<script>
+  // Override schedule path for admin (one level up)
+  window.loadSchedule = async function() {
+    const override = localStorage.getItem('vv_schedule_override');
+    if (override) { try { return JSON.parse(override); } catch {} }
+    try { const r = await fetch('./schedule.json'); return await r.json(); } catch { return []; }
+  };
+
+  function switchAdminTab(tab) {
+    document.querySelectorAll('.admin-tab-btn').forEach((b, i) => {
+      const tabs = ['add','list','help'];
+      b.classList.toggle('active', tabs[i] === tab);
+    });
+    document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    if (tab === 'list') renderAdminList();
+  }
+
+  // Update stats after data loads
+  async function updateStats() {
+    const data = await loadSchedule();
+    const today = getTodayStr();
+    const in7days = new Date(); in7days.setDate(in7days.getDate() + 7);
+    const i7 = in7days.toISOString().slice(0,10);
+    document.getElementById('stat-total').textContent = data.length;
+    document.getElementById('stat-today').textContent = data.filter(e => e.date === today).length;
+    document.getElementById('stat-upcoming').textContent = data.filter(e => e.date > today && e.date <= i7).length;
+    adminScheduleData = data;
+    renderAdminList();
+    updateAdminDateInput();
+  }
+
+  function getTodayStr() {
+    const n = new Date(); const y = n.getFullYear(), m = String(n.getMonth()+1).padStart(2,'0'), d = String(n.getDate()).padStart(2,'0');
+    return `${y}-${m}-${d}`;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initAdmin();
+    // After login, update stats
+    const orig = window.showAdminPanel;
+    window.showAdminPanel = function() {
+      if(orig) orig();
+      setTimeout(updateStats, 200);
+    };
+  });
+</script>
+</body>
+</html>

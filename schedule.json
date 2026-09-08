@@ -1,0 +1,102 @@
+[
+  {
+    "id": "1",
+    "date": "2026-09-08",
+    "time": "08:00",
+    "title": "Pratah Shakha — Morning Assembly",
+    "location": "Model Town, Delhi",
+    "description": "Daily morning discipline session with party workers and youth volunteers.",
+    "eventType": "Party Meeting",
+    "mapUrl": "https://maps.google.com/?q=Model+Town+Delhi"
+  },
+  {
+    "id": "2",
+    "date": "2026-09-08",
+    "time": "10:30",
+    "title": "Jan Samvad — Public Outreach",
+    "location": "Adarsh Nagar Market, Delhi",
+    "description": "Direct interaction with local traders and residents on price rise and infrastructure issues.",
+    "eventType": "Public Meeting",
+    "mapUrl": "https://maps.google.com/?q=Adarsh+Nagar+Delhi"
+  },
+  {
+    "id": "3",
+    "date": "2026-09-08",
+    "time": "13:00",
+    "title": "Blood Donation Camp — Inauguration",
+    "location": "Shyam Lal College, Delhi",
+    "description": "Inaugurating a blood donation camp organized by BJP Yuva Morcha, Delhi unit.",
+    "eventType": "Inauguration",
+    "mapUrl": "https://maps.google.com/?q=Shyam+Lal+College+Delhi"
+  },
+  {
+    "id": "4",
+    "date": "2026-09-08",
+    "time": "16:00",
+    "title": "Constituency Tour — Sarpanch Sammelan",
+    "location": "Burari, North Delhi",
+    "description": "Meeting with ward-level workers and booth presidents to review booth management.",
+    "eventType": "Constituency Work",
+    "mapUrl": "https://maps.google.com/?q=Burari+Delhi"
+  },
+  {
+    "id": "5",
+    "date": "2026-09-08",
+    "time": "19:00",
+    "title": "BJP Yuva Morcha Core Committee Meeting",
+    "location": "BJP Delhi Office, Pandit Pant Marg",
+    "description": "Strategy meeting for upcoming Delhi Municipal Corporation outreach programme.",
+    "eventType": "Party Meeting",
+    "mapUrl": "https://maps.google.com/?q=BJP+Delhi+Office"
+  },
+  {
+    "id": "6",
+    "date": "2026-09-07",
+    "time": "09:00",
+    "title": "Press Conference — Youth Employment",
+    "location": "Press Club of India, Delhi",
+    "description": "Addressed media on state government's failure to fulfil youth employment promises.",
+    "eventType": "Press Conference",
+    "mapUrl": "https://maps.google.com/?q=Press+Club+India+Delhi"
+  },
+  {
+    "id": "7",
+    "date": "2026-09-07",
+    "time": "14:00",
+    "title": "School Visit — Mid-Day Meal Inspection",
+    "location": "Govt. Sarvodaya School, Rohini",
+    "description": "Surprise inspection of mid-day meal quality and school infrastructure.",
+    "eventType": "Constituency Work",
+    "mapUrl": "https://maps.google.com/?q=Rohini+Delhi"
+  },
+  {
+    "id": "8",
+    "date": "2026-09-06",
+    "time": "11:00",
+    "title": "Tree Plantation Drive",
+    "location": "Central Park, Rohini Sector 1",
+    "description": "Green Delhi initiative — planted 500 saplings with volunteers and school children.",
+    "eventType": "Social Initiative",
+    "mapUrl": "https://maps.google.com/?q=Rohini+Sector+1+Delhi"
+  },
+  {
+    "id": "9",
+    "date": "2026-09-06",
+    "time": "17:00",
+    "title": "Rozgar Mela — Job Fair",
+    "location": "Yamuna Sports Complex, Delhi",
+    "description": "Organized employment fair connecting 800+ youth with private sector employers.",
+    "eventType": "Public Event",
+    "mapUrl": "https://maps.google.com/?q=Yamuna+Sports+Complex+Delhi"
+  },
+  {
+    "id": "10",
+    "date": "2026-09-05",
+    "time": "10:00",
+    "title": "BJP District President Meet",
+    "location": "BJP North Delhi District Office",
+    "description": "Monthly coordination meeting with district party leadership.",
+    "eventType": "Party Meeting",
+    "mapUrl": "https://maps.google.com/?q=BJP+North+Delhi"
+  }
+]

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Schedule — Vasudev Verma | BJP Yuva Neta Delhi</title>
+  <meta name="description" content="Vasudev Verma का आज का कार्यक्रम — कहाँ जा रहे हैं, कौनसा event, कितने बजे। Daily schedule updated every morning." />
+  <meta name="keywords" content="Vasudev Verma schedule, vasudev verma today, BJP yuva neta schedule delhi" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="navbar-inner container">
+    <a href="index.html" class="navbar-brand">
+      <div class="navbar-brand-logo">VV</div>
+      <div class="navbar-brand-text">
+        <span class="navbar-brand-name">Vasudev Verma</span>
+        <span class="navbar-brand-sub">BJP Yuva Neta · Delhi</span>
+      </div>
+    </a>
+    <div class="navbar-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">Parichay</a>
+      <a href="schedule.html" class="active">Schedule</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="social.html">Social</a>
+      <a href="news.html">News</a>
+      <a href="contact.html" class="navbar-cta">Contact</a>
+    </div>
+    <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="tricolor-bar"></div>
+</nav>
+<div class="mobile-nav">
+  <a href="index.html">🏠 Home</a>
+  <a href="about.html">👤 Parichay</a>
+  <a href="schedule.html">📅 Schedule</a>
+  <a href="gallery.html">📸 Gallery</a>
+  <a href="social.html">📱 Social Media</a>
+  <a href="news.html">📰 News & Press</a>
+  <a href="contact.html">🤝 Contact</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container page-fade">
+    <span style="display:inline-block;background:rgba(255,153,51,0.2);color:var(--saffron);padding:0.3rem 1rem;border-radius:20px;font-size:0.8rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Daily Diary · दैनिक डायरी</span>
+    <h1 class="heading-xl">आज का कार्यक्रम</h1>
+    <p>Vasudev Verma आज कहाँ हैं — हर कार्यक्रम की जानकारी समय के साथ</p>
+    <div style="display:flex;align-items:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.7);">
+        <span style="width:10px;height:10px;border-radius:50%;background:var(--saffron);display:inline-block;"></span>
+        Party Meeting
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.7);">
+        <span style="width:10px;height:10px;border-radius:50%;background:#4caf50;display:inline-block;"></span>
+        Public Meeting
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.7);">
+        <span style="width:10px;height:10px;border-radius:50%;background:#2196f3;display:inline-block;"></span>
+        Inauguration
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:rgba(255,255,255,0.7);">
+        <span style="width:10px;height:10px;border-radius:50%;background:#9c27b0;display:inline-block;"></span>
+        Press Conference
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE CONTENT -->
+<section class="section">
+  <div class="container">
+
+    <!-- Date Tabs -->
+    <div style="margin-bottom:2rem;">
+      <p style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.75rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;">तारीख चुनें / Select Date</p>
+      <div class="schedule-date-tabs" id="date-tabs">
+        <!-- Populated by JS -->
+        <div style="color:var(--text-light);font-size:0.875rem;padding:0.5rem;">Loading dates…</div>
+      </div>
+    </div>
+
+    <!-- Full Schedule Box -->
+    <div class="full-schedule">
+      <div class="full-schedule-header">
+        <h3>📅 <span id="schedule-header-date">आज का कार्यक्रम</span></h3>
+        <p>समय · स्थान · कार्यक्रम का विवरण</p>
+      </div>
+      <div id="full-schedule-container">
+        <div class="no-schedule" style="padding:3rem;">
+          <div class="icon">⏳</div>
+          <p>Schedule लोड हो रहा है…</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Info Box -->
+    <div style="margin-top:2rem;padding:1.25rem 1.5rem;background:var(--saffron-light);border-radius:var(--radius-md);border-left:4px solid var(--saffron);font-size:0.875rem;color:var(--text-mid);">
+      <strong style="color:var(--navy);">📢 नोट:</strong> यह schedule रोज़ सुबह update होता है। किसी कार्यक्रम में बदलाव के लिए office से संपर्क करें।
+      Office: <a href="tel:+911234567890" style="color:var(--saffron);font-weight:600;">+91 12345 67890</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK CONTACT -->
+<section class="section-sm" style="background:var(--off-white);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;" class="grid-3-resp">
+      <div class="contact-info-card">
+        <div class="contact-info-icon">📞</div>
+        <div>
+          <h4>Office</h4>
+          <p>+91 12345 67890<br>सोमवार–शनिवार, 10am–6pm</p>
+        </div>
+      </div>
+      <div class="contact-info-card" style="border-left-color:var(--green);">
+        <div class="contact-info-icon" style="background:var(--green-light);color:var(--green);">📧</div>
+        <div>
+          <h4>Email</h4>
+          <p>office@vasudevverma.in<br>24 घंटे में जवाब</p>
+        </div>
+      </div>
+      <div class="contact-info-card" style="border-left-color:var(--navy);">
+        <div class="contact-info-icon" style="background:#e8eaf6;color:var(--navy);">🔐</div>
+        <div>
+          <h4>Admin Panel</h4>
+          <p><a href="admin.html" style="color:var(--saffron);font-weight:600;">Schedule update करें →</a><br>Staff only</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="navbar-brand" style="margin-bottom:1rem;">
+          <div class="navbar-brand-logo">VV</div>
+          <div class="navbar-brand-text">
+            <span class="navbar-brand-name">Vasudev Verma</span>
+            <span class="navbar-brand-sub">BJP Yuva Neta · Delhi</span>
+          </div>
+        </div>
+        <p>Delhi के युवाओं और जनता की सेवा में समर्पित।</p>
+        <div class="footer-social">
+          <a href="https://instagram.com/vasudev_office" target="_blank" class="social-icon">📷</a>
+          <a href="https://instagram.com/official_vasudev_bjp" target="_blank" class="social-icon">🏛️</a>
+          <a href="#" class="social-icon">🐦</a><a href="#" class="social-icon">📘</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <div class="footer-links">
+          <a href="index.html">🏠 Home</a><a href="about.html">👤 Parichay</a>
+          <a href="schedule.html">📅 Schedule</a><a href="gallery.html">📸 Gallery</a>
+          <a href="news.html">📰 News</a><a href="contact.html">🤝 Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">Contact</div>
+        <div class="footer-links">
+          <a href="#">📍 BJP Yuva Morcha Office, Delhi</a>
+          <a href="tel:+911234567890">📞 +91 12345 67890</a>
+          <a href="mailto:office@vasudevverma.in">📧 office@vasudevverma.in</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Vasudev Verma. All rights reserved.</p>
+      <p class="footer-disclaimer">यह एक official political leader की व्यक्तिगत वेबसाइट है।</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Override fetch path for schedule.json
+  window.loadSchedule = async function() {
+    try {
+      const res = await fetch('./schedule.json');
+      return await res.json();
+    } catch { return []; }
+  };
+  initFullSchedule();
+});
+</script>
+</body>
+</html>
